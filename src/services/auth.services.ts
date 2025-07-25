@@ -17,12 +17,38 @@ export const register = async (name: string, email: string, password: string) =>
     return { message: "Registered! OTP sent to email (simulated)", otp };
 };
 
-export const verifyOtp = async (email: string, otp: string) => {
-    const { data: user } = await supabase.from('users').select('*').eq('email', email).single();
-    if (!user || user.otp !== otp) throw new Error("Invalid OTP");
 
-    await supabase.from('users').update({ is_verified: true, otp: null }).eq('email', email);
-    return { message: "Verified successfully" };
+export const verifyOtp = async (email: string, otp: string) => {
+  const { data: user, error } = await supabase
+    .from("users")
+    .select("*")
+    .eq("email", email)
+    .single();
+
+  if (error || !user) throw new Error("User not found");
+
+  if (user.otp !== otp) throw new Error("Invalid OTP");
+
+  const { error: updateError } = await supabase
+    .from("users")
+    .update({ is_verified: true, otp: null })
+    .eq("email", email);
+
+  if (updateError) throw new Error("Failed to update verification status");
+
+  const accessToken = generateAccessToken(user.id);
+  const refreshToken = generateRefreshToken(user.id);
+
+  return {
+    message: "OTP Verified & Session Started 🎉",
+    user: {
+      id: user.id,
+      name: user.name,
+      email: user.email,
+    },
+    accessToken,
+    refreshToken,
+  };
 };
 
 

@@ -12,8 +12,8 @@ export const registerUser = async (req: Request, res: Response) => {
         const { otp } = result;
 
         // Send OTP mail after successful registration
-       const emailResult =  await sendOtpEmail(name, email, otp);
-console.log(emailResult)
+        const emailResult = await sendOtpEmail(name, email, otp);
+        console.log(emailResult)
         res.status(201).json(result);
     } catch (err: any) {
         res.status(400).json({ error: err.message });
