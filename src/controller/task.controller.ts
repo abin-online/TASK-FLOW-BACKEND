@@ -21,16 +21,6 @@ export const getTasks = async (req: Request, res: Response) => {
   }
 };
 
-export const updateTaskStatus = async (req: Request, res: Response) => {
-  const { id } = req.params;
-  const { completed } = req.body;
-  try {
-    const updated = await TaskService.updateTaskStatus(id, completed);
-    res.status(200).json(updated);
-  } catch (err: any) {
-    res.status(400).json({ error: err.message });
-  }
-};
 
 export const deleteTask = async (req: Request, res: Response) => {
   const { id } = req.params;
