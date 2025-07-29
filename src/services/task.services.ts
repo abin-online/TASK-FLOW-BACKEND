@@ -28,7 +28,7 @@ export const createTask = async (payload: TaskPayload) => {
 export const getTasks = async (user_id: string) => {
   console.log('in the service', user_id)
   const { data, error } = await supabase
-    .from('tasks')
+    .from('todos')
     .select('*')
     .eq('user_id', user_id)
     .order('created_at', { ascending: false });
@@ -42,7 +42,7 @@ console.log(error)
 
 export const updateTaskStatus = async (id: string, completed: boolean) => {
   const { data, error } = await supabase
-    .from('tasks')
+    .from('todos')
     .update({ completed })
     .eq('id', id)
     .select()
@@ -54,7 +54,7 @@ export const updateTaskStatus = async (id: string, completed: boolean) => {
 
 export const deleteTask = async (id: string) => {
   const { error } = await supabase
-    .from('tasks')
+    .from('todos')
     .delete()
     .eq('id', id);
 
