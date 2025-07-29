@@ -19,6 +19,8 @@ console.log(token)
   }
 
   try {
+    console.log("ACCESS_SECRET from env:", process.env.ACCESS_SECRET);
+
     console.log(process.env.ACCESS_SECRET)
     const decoded = jwt.verify(token, process.env.ACCESS_SECRET as string);
     console.log(decoded)
