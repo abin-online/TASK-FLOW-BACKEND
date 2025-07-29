@@ -65,7 +65,7 @@ export const deleteTask = async (id: string) => {
 export const changeTaskStatus = async (id: string) => {
 
   const { data: currentTask, error: fetchError } = await supabase
-    .from('tasks')
+    .from('todos')
     .select('completed')
     .eq('id', id)
     .single();
@@ -77,7 +77,7 @@ export const changeTaskStatus = async (id: string) => {
 
   // Update with the toggled status
   const { data, error: updateError } = await supabase
-    .from('tasks')
+    .from('todos')
     .update({ completed: newStatus })
     .eq('id', id)
     .select()
