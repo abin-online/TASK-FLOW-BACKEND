@@ -66,19 +66,19 @@ export const changeTaskStatus = async (id: string) => {
 
   const { data: currentTask, error: fetchError } = await supabase
     .from('tasks')
-    .select('status')
+    .select('completed')
     .eq('id', id)
     .single();
 
   if (fetchError) throw new Error(fetchError.message);
 
   // Toggle the status
-  const newStatus = !currentTask?.status;
+  const newStatus = !currentTask?.completed;
 
   // Update with the toggled status
   const { data, error: updateError } = await supabase
     .from('tasks')
-    .update({ status: newStatus })
+    .update({ completed: newStatus })
     .eq('id', id)
     .select()
     .single();
