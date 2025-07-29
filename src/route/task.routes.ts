@@ -6,6 +6,6 @@ const router = Router();
 router.post('/', authenticate,  createTask);
 router.get('/', authenticate,  getTasks);
 router.delete('/:id', authenticate,  deleteTask);
-router.patch('/id', authenticate, changeTaskStatus)
+router.patch('/:id', authenticate, changeTaskStatus)
 
 export default router;
