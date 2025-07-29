@@ -4,6 +4,7 @@ import * as TaskService from '../services/task.services'
 export const createTask = async (req: Request, res: Response) => {
   const { title, description, user_email } = req.body;
   try {
+    console.log(req.body)
     const task = await TaskService.createTask(title, description, user_email);
     res.status(201).json(task);
   } catch (err: any) {
