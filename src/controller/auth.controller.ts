@@ -48,7 +48,7 @@ export const refreshToken = async (req: Request, res: Response): Promise<void> =
     try {
         const decoded = verifyRefreshToken(token) as any;
         const newAccessToken = generateAccessToken(decoded.userId);
-
+console.log(decoded, newAccessToken)
         res.status(200).json({ accessToken: newAccessToken });
     } catch (err) {
         res.status(401).json({ error: "Invalid refresh token" });
