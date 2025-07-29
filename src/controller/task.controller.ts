@@ -32,7 +32,8 @@ export const getTasks = async (req: Request, res: Response) => {
   try {
         const user_id = (req as any).user?.userId; // assuming user is attached by auth middleware
 
-    const tasks = await TaskService.getTasks(user_id as string);
+    const tasks = await TaskService.getTasks(user_id);
+    console.log(tasks)
     res.status(200).json(tasks);
   } catch (err: any) {
     res.status(400).json({ error: err.message });
