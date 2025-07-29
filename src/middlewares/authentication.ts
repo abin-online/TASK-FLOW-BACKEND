@@ -25,7 +25,7 @@ export const authenticate = (
     console.log("ACCESS_SECRET from env:", ACCESS_SECRET);
 
     console.log(process.env.ACCESS_SECRET)
-    const decoded = jwt.verify(token, ACCESS_SECRET as string);
+    const decoded = jwt.verify(token, 'access-secret-key' as string);
     console.log(decoded)
     req.user = decoded;
     next();
