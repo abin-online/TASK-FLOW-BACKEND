@@ -54,10 +54,10 @@ export const deleteTask = async (req: Request, res: Response) => {
 
 
 export const changeTaskStatus = async (req: Request, res: Response) => {
-  const { id, completed } = req.body;
+  const { id } = req.params;
 
   try {
-    const updated = await TaskService.changeTaskStatus(id, completed);
+    const updated = await TaskService.changeTaskStatus(id);
     res.status(200).json(updated);
   } catch (err: any) {
     res.status(500).json({ error: err.message });
