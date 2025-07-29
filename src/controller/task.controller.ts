@@ -5,7 +5,7 @@ import * as TaskService from '../services/task.services'
 export const createTask = async (req: Request, res: Response) => {
   try {
     const { title, description, dueDate, completed } = req.body;
-    const user_id = (req as any).user?.id; // assuming user is attached by auth middleware
+    const user_id = (req as any).user?.userId; // assuming user is attached by auth middleware
 console.log(user_id)
     if (!user_id) {
       return res.status(401).json({ message: "Unauthorized: No user found" });
