@@ -12,7 +12,7 @@ export const authenticate = (
 ): void => {
   const authHeader = req.headers.authorization;
   const token = authHeader?.split(" ")[1];
-
+console.log(token)
   if (!token) {
     res.status(401).json({ message: "Token missing" });
     return;
@@ -20,6 +20,7 @@ export const authenticate = (
 
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET as string);
+    console.log(decoded)
     req.user = decoded;
     next();
   } catch (err) {

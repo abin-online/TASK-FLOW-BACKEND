@@ -1,21 +1,31 @@
 import { Request, Response } from 'express';
 import * as TaskService from '../services/task.services'
 
+
 export const createTask = async (req: Request, res: Response) => {
-  const { title, description, user_email } = req.body;
-
   try {
-    console.log("📥 Incoming Data:", req.body);
+    const { title, description, dueDate, completed } = req.body;
+    const user_id = (req as any).user?.id; // assuming user is attached by auth middleware
+console.log(user_id)
+    if (!user_id) {
+      return res.status(401).json({ message: "Unauthorized: No user found" });
+    }
 
-    const task = await TaskService.createTask(title, description, user_email);
+    const task = await TaskService.createTask({
+      title,
+      description,
+      due_date: dueDate,
+      completed,
+      user_id,
+    });
 
-    console.log("✅ Created Task:", task);
     res.status(201).json(task);
   } catch (err: any) {
     console.error("❌ Error Creating Task:", err.message);
-    res.status(400).json({ error: err.message });
+    res.status(500).json({ message: "Internal Server Error" });
   }
 };
+
 
 
 export const getTasks = async (req: Request, res: Response) => {
