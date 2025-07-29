@@ -19,7 +19,7 @@ console.log(token)
   }
 
   try {
-    const decoded = jwt.verify(token, process.env.JWT_SECRET as string);
+    const decoded = jwt.verify(token, process.env.ACCESS_SECRET as string);
     console.log(decoded)
     req.user = decoded;
     next();
