@@ -14,7 +14,7 @@ console.log(user_id)
     const task = await TaskService.createTask({
       title,
       description,
-      due_date: dueDate,
+      dueDate,
       completed,
       user_id,
     });

@@ -4,7 +4,7 @@ import { supabase } from '../util/db';
 interface TaskPayload {
   title: string;
   description: string;
-  due_date: string;
+  dueDate: string;
   completed: boolean;
   user_id: string;
 }
