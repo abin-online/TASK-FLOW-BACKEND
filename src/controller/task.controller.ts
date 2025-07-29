@@ -44,6 +44,7 @@ console.log(user_id)
 
 export const deleteTask = async (req: Request, res: Response) => {
   const { id } = req.params;
+  console.log('going to delete this ',id)
   try {
     await TaskService.deleteTask(id);
     res.status(204).send();
@@ -57,6 +58,8 @@ export const changeTaskStatus = async (req: Request, res: Response) => {
   const { id } = req.params;
 
   try {
+      console.log('going to toggle this ',id)
+
     console.log('params ID ', id)
     const updated = await TaskService.changeTaskStatus(id);
     res.status(200).json(updated);
