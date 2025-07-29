@@ -33,7 +33,10 @@ export const getTasks = async (user_id: string) => {
     .eq('user_id', user_id)
     .order('created_at', { ascending: false });
 
-  if (error) throw new Error(error.message);
+  if (error) {
+console.log(error)
+    throw new Error(error.message);
+  }
   return data;
 };
 
