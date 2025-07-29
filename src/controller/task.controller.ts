@@ -57,6 +57,7 @@ export const changeTaskStatus = async (req: Request, res: Response) => {
   const { id } = req.params;
 
   try {
+    console.log('params ID ', id)
     const updated = await TaskService.changeTaskStatus(id);
     res.status(200).json(updated);
   } catch (err: any) {
