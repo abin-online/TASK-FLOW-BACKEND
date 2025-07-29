@@ -3,14 +3,20 @@ import * as TaskService from '../services/task.services'
 
 export const createTask = async (req: Request, res: Response) => {
   const { title, description, user_email } = req.body;
+
   try {
-    console.log(req.body)
+    console.log("📥 Incoming Data:", req.body);
+
     const task = await TaskService.createTask(title, description, user_email);
+
+    console.log("✅ Created Task:", task);
     res.status(201).json(task);
   } catch (err: any) {
+    console.error("❌ Error Creating Task:", err.message);
     res.status(400).json({ error: err.message });
   }
 };
+
 
 export const getTasks = async (req: Request, res: Response) => {
   const { user_email } = req.query;

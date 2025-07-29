@@ -1,13 +1,23 @@
 import { supabase } from '../util/db';
 
-export const createTask = async (title: string, description: string, user_email: string) => {
+export const createTask = async (
+  title: string,
+  description: string,
+  user_email: string
+) => {
   const { data, error } = await supabase.from('tasks').insert([
     { title, description, user_email }
   ]).select().single();
 
-  if (error) throw new Error(error.message);
+  if (error) {
+    console.error("❌ Supabase Insert Error:", error);
+    throw new Error(error.message);
+  }
+
+  console.log("📦 Supabase Insert Success:", data);
   return data;
 };
+
 
 export const getTasks = async (user_email: string) => {
   const { data, error } = await supabase
