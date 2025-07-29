@@ -62,6 +62,7 @@ export const changeTaskStatus = async (req: Request, res: Response) => {
 
     console.log('params ID ', id)
     const updated = await TaskService.changeTaskStatus(id);
+    console.log(updated)
     res.status(200).json(updated);
   } catch (err: any) {
     res.status(500).json({ error: err.message });
