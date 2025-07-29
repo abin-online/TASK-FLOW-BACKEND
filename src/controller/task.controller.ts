@@ -29,9 +29,10 @@ console.log(user_id)
 
 
 export const getTasks = async (req: Request, res: Response) => {
-  const { user_email } = req.query;
   try {
-    const tasks = await TaskService.getTasks(user_email as string);
+        const user_id = (req as any).user?.userId; // assuming user is attached by auth middleware
+
+    const tasks = await TaskService.getTasks(user_id as string);
     res.status(200).json(tasks);
   } catch (err: any) {
     res.status(400).json({ error: err.message });

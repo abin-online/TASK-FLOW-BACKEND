@@ -25,11 +25,11 @@ export const createTask = async (payload: TaskPayload) => {
 }
 
 
-export const getTasks = async (user_email: string) => {
+export const getTasks = async (user_id: string) => {
   const { data, error } = await supabase
     .from('tasks')
     .select('*')
-    .eq('user_email', user_email)
+    .eq('user_id', user_id)
     .order('created_at', { ascending: false });
 
   if (error) throw new Error(error.message);
