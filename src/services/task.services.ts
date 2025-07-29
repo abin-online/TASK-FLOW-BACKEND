@@ -26,6 +26,7 @@ export const createTask = async (payload: TaskPayload) => {
 
 
 export const getTasks = async (user_id: string) => {
+  console.log('in the service', user_id)
   const { data, error } = await supabase
     .from('tasks')
     .select('*')

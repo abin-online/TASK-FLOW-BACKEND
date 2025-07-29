@@ -30,8 +30,9 @@ console.log(user_id)
 
 export const getTasks = async (req: Request, res: Response) => {
   try {
+    
         const user_id = (req as any).user?.userId; // assuming user is attached by auth middleware
-
+console.log(user_id)
     const tasks = await TaskService.getTasks(user_id);
     console.log(tasks)
     res.status(200).json(tasks);
